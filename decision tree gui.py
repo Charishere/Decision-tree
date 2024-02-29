@@ -11,7 +11,6 @@ from IPython.display import Image
 import pydotplus
 from tkinter import messagebox
 from tkinter import font 
-#import DecisionTreeClassifier 
 
 
 clf = None
@@ -106,14 +105,14 @@ load_but.grid(row=0,column=2,sticky="w", padx=0)
 train_line = tk.Frame(frame)
 train_line.grid(row=1, column=0, sticky="w", pady=3)
 
-label_alg = tk.Label(master=train_line, text="选择划分算法")
+label_alg = tk.Label(master=train_line, text="Choose the algorithm")
 label_alg.grid(row=1, column=0, sticky="w")
 
 ##tree list
 tree_line = tk.Frame(frame)
 tree_line.grid(row=2, column=0, sticky="w", pady=3)
 
-label_tre = tk.Label(master=tree_line, text="输入生成几棵树")
+label_tre = tk.Label(master=tree_line, text="How many trees")
 label_tre.grid(row=2, column=0, sticky="w")
 tre_ent = tk.Entry(master=tree_line, width=3)
 tre_ent.grid(row=2, column=1,sticky="w",padx=4)
@@ -198,13 +197,10 @@ def generate_and_display_tree():
 
             graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
             graph.write_png(f'tree {index}.png')
-            # Open the PNG image using PIL
             img = Image.open(f'tree {index}.png') 
             originals.append(img)       
             img_p = img.resize((1000, 500), Image.LANCZOS)
-            # Convert PIL image to Tkinter PhotoImage
             img_tk = ImageTk.PhotoImage(img_p)
-            # Update the label's image
             panel.configure(image=img_tk)
             panel.image = img_tk
             panel.original_image = img
@@ -228,11 +224,9 @@ class TreeViewer:
             self.viewer_window = Toplevel()
             self.viewer_window.title("Tree Viewer")
             
-            # Create Label to display image
             self.image_label = Label(self.viewer_window)
             self.image_label.pack()
 
-            # Create navigation buttons
             btn_prev = Button(self.viewer_window, text="<", command=self.show_prev)
             btn_next = Button(self.viewer_window, text=">", command=self.show_next)
             btn_prev.pack(side=LEFT)
@@ -240,7 +234,6 @@ class TreeViewer:
 
             self.image_label.bind("<Button-1>", lambda event: self.open_default_viewer())
             
-        # Display the first image
         self.show_image()
 
     def show_image(self):
@@ -311,6 +304,7 @@ train_but = tk.Button(master=model_buttons, text="Train", command=train)
 
 plot_but = tk.Button(master=model_buttons,command=generate_and_display_tree, text="Plot")
 
+#accuracy
 def accu():
     global clf, X_test, y_test, accuracy_value, trees, num_trees
     if accuracy_value is not None:
