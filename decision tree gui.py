@@ -4,7 +4,6 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
-#draw desicion tree
 from sklearn.tree import export_graphviz
 from six import StringIO
 from IPython.display import Image  
